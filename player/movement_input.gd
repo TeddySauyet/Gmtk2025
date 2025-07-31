@@ -4,24 +4,32 @@ class_name MovementInput
 @export var char : CharacterBody2D
 
 @export_category("Plane speeds")
-@export var throttle_max : float = 600.0
-@export var gravity_max : float = 500.0
-@export var lift_max : float = 4000.0
-@export var max_throttle_speed : float = 600
+@export var throttle_max : float = 300.0
+@export var gravity_max : float = 750.0
+@export var lift_vel_coef := 200.0
+@export var max_throttle_speed : float = 600.0
 @onready var _drag_coef : float = throttle_max/max_throttle_speed**2
 
 @export_category("Inputs")
 @export var throttle_delta_scale : float = 1.0
 var state_throttle_alpha := 1.0
 
-#@onready var state_autopilot_angle := char.transform.get_rotation()
-@onready var state_autopilot_angle := PI/4
 var state_autopilot_on : bool = true
-@export var lift_delta_scale := 1.0
+@export var lift_delta_scale := 5.0
 var state_lift_alpha : float = 0.0
 
 func _ready() -> void:
 	char.velocity = Vector2(300.0,0)
+
+## Only clamps magnitude without direction
+func clamp_vec_mag(vec : Vector2, mini, maxi) -> Vector2:
+	var mag = vec.length()
+	if mag < mini:
+		return vec.normalized() * mini
+	elif mag > maxi:
+		return vec.normalized() * maxi
+	else:
+		return vec
 
 func apply_movement(delta : float) -> void:
 	var gravity_force := Vector2.DOWN * gravity_max
@@ -42,24 +50,16 @@ func apply_movement(delta : float) -> void:
 	
 	var lift_force := Vector2.ZERO
 	if state_autopilot_on:
-		#var des_dir := Vector2(cos(state_autopilot_angle), sin(state_autopilot_angle))
-		#var des_force = -total_force.project(des_dir)
-		#var len = des_force.length()
-		#var max_mag_force = lift_max * char.velocity.length()/max_throttle_speed
-		#var actual_mag = clampf(len, -max_mag_force, max_mag_force)
-		#lift_force = vertical * actual_mag
-		var scale := (vertical.project(Vector2.DOWN)).length()
-		var mag := gravity_force.length()
-		var max_force := lift_max * char.velocity.length()/max_throttle_speed
-		mag = clampf(mag,-max_force,max_force)
-		lift_force = vertical * mag
-		
-		
+		var max_vertical_force := vertical * char.velocity.length() * lift_vel_coef
+		var max_up_portion := vertical.project(Vector2.UP).length() * max_vertical_force.length()
+		var desired_up_portion := total_force.project(Vector2.UP).length()
+		var frac = clampf(max_up_portion, 0.0, desired_up_portion)
+		lift_force = max_vertical_force * frac/max_up_portion
 	else:
-		lift_force = vertical * state_lift_alpha * lift_max * char.velocity.length()/max_throttle_speed
+		lift_force = vertical * state_lift_alpha * char.velocity.length() * lift_vel_coef
 	
-	print(total_force,lift_force)
-	total_force += lift_force
+	print(state_autopilot_on,total_force,lift_force, state_lift_alpha)
+	total_force += lift_force * delta
 	
 	char.velocity += total_force * delta
 	char.move_and_slide()
@@ -73,19 +73,21 @@ func set_movement_values(delta : float) -> void:
 	state_throttle_alpha = clampf(state_throttle_alpha, -1, 1)
 	state_lift_alpha += Input.get_axis("lift_up", "lift_down") * lift_delta_scale * delta
 	state_lift_alpha = clampf(state_lift_alpha, -1.0, 1.0)
-	var new_autopilot = Input.is_action_pressed("lift_down") or Input.is_action_pressed("lift_up")
+	var new_autopilot = not(Input.is_action_pressed("lift_down") or Input.is_action_pressed("lift_up"))
 	if new_autopilot != state_autopilot_on:
-		state_autopilot_on
-		if new_autopilot:
-			state_autopilot_angle = char.velocity.angle()
-			
-	#if state_autopilot_on:
-		#if char.velocity.angle() < state_autopilot_angle:
-			#state_lift_alpha += lift_delta_scale*delta
-		#elif char.velocity.angle() > state_autopilot_angle:
-			#state_lift_alpha -= lift_delta_scale*delta
+		state_autopilot_on = new_autopilot
+
 	
 func _physics_process(delta: float) -> void:
 	set_movement_values(delta)
 	apply_movement(delta)
 	#print(state_lift_alpha)
+	var rect := get_viewport().get_visible_rect()
+	if char.position.x < 0:
+		char.position.x += rect.size.x
+	if char.position.x > rect.size.x:
+		char.position.x -= rect.size.x
+	if char.position.y < 0:
+		char.position.y += rect.size.y
+	if char.position.y > rect.size.y:
+		char.position.y -= rect.size.y
