@@ -1,7 +1,7 @@
 extends Node
 class_name Duplicator
 
-@export var root : Node2D
+@export var root : Node2D : set = set_root
 
 class Item:
 	var main : Node2D
@@ -13,7 +13,7 @@ var items : Array[Item]
 func add_item(node : Node) -> void:
 	if node.get_parent() == root and node is Node2D and not node.is_in_group("duplicates") and node.is_in_group("main"):
 	#if node is Node2D:
-		print(node)
+		#print(node)
 		var item = Item.new()
 		item.main = node
 		item.main.add_to_group("main")
@@ -28,24 +28,31 @@ func add_item(node : Node) -> void:
 		items.push_back(item)
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+#func _ready() -> void:
+	#root.child_entered_tree.connect(add_item)
+
+func set_root(new_root : Node2D) -> void:
+	if root:
+		root.child_entered_tree.disconnect(add_item)
+	root = new_root
 	root.child_entered_tree.connect(add_item)
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(items[0].main,'|',items[0].negative,'|', items[0].positive,'\n')
+	#print(items[0].main,'|',items[0].negative,'|', items[0].positive,'\n')
 	#print(items.size())
 	var to_delete : Array[Item] = []
 	for item in items:
-		if not item.main:
-			if item.negative:
-				item.negative.queue_free()
-			if item.positive:
-				item.negative.queue_free()
-			to_delete.push_back(item)
 		var rect := get_viewport().get_visible_rect()
-		if item.main.global_position.x < 0:
+		if not item.main:
+			#if item.negative and not item.negative.is_queued_for_deletion():
+			if is_instance_valid(item.negative):
+				item.negative.queue_free()
+			#if item.positive and not item.positive.is_queued_for_deletion():
+			if is_instance_valid(item.positive):
+				item.positive.queue_free()
+			to_delete.push_back(item)
+			continue
+		elif item.main.global_position.x < 0:
 			item.negative.queue_free()
 			item.negative = item.main
 			item.negative.remove_from_group("main")

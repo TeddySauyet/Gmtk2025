@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://7naagek157dw"]
+
+[ext_resource type="Script" path="res://levels/level_helper.gd" id="1_oi7vi"]
+[ext_resource type="PackedScene" uid="uid://q2tnuge8ka6i" path="res://tech/Duplicator.tscn" id="2_lateb"]
+
+[node name="LevelHelper" type="Node2D"]
+script = ExtResource("1_oi7vi")
+
+[node name="Duplicator" parent="." node_paths=PackedStringArray("root") instance=ExtResource("2_lateb")]
+root = NodePath("..")

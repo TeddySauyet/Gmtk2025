@@ -7,6 +7,8 @@ var trail_markers : Array[TrailMarker]
 @export var min_distance : float = 20
 @export var spawn_parent : Node2D
 
+var need_to_spawn := false
+
 func _ready() -> void:
 	var a1 = Vector2(0, 0)
 	var a2 = Vector2(1, 1)
@@ -74,16 +76,13 @@ func check_latest_for_collision() -> int:
 			return idx
 	return NAN
 
+
 func spawn_collision(start_idx : int) -> void:
-	#print_debug("Hello world! ", start_idx)
-	#var a1 = trail_markers[start_idx].global_position
-	#var a2 = trail_markers[start_idx+1].global_position
-	#var b1 = trail_markers[-1].global_position
-	#var b2 = trail_markers[-2].global_position
-	#print(a1,a2)
-	#print(b1,b2)
-	#var i = get_line_segment_intersection(a1,a2,b1,b2)
-	#print(i, is_nan(i.x), is_nan(i.y))
-	#
-	trail_markers[start_idx].scale *= Vector2(3,3)
-	#Engine.time_scale = 0
+	#trail_markers[start_idx].scale *= Vector2(3,3)
+	var loop = preload("res://player/loop.tscn").instantiate()
+	var poly : PackedVector2Array
+	poly.resize(trail_markers.size() - start_idx)
+	for idx in range(start_idx, trail_markers.size()):
+		poly[idx-start_idx] = trail_markers[idx].global_position
+	loop.polygon = poly
+	spawn_parent.add_child(loop)
