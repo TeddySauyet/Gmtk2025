@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://q2tnuge8ka6i"]
+
+[ext_resource type="Script" path="res://tech/duplicator.gd" id="1_ck5nh"]
+
+[node name="Duplicator" type="Node"]
+script = ExtResource("1_ck5nh")

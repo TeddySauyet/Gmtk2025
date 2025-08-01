@@ -12,14 +12,16 @@ func _ready() -> void:
 	var a2 = Vector2(1, 1)
 	var b1 = Vector2(1,0)
 	var b2 = Vector2(0,1)
-	print_debug(get_line_segment_intersection(a1,a2,b1,b2))
+	#print_debug(get_line_segment_intersection(a1,a2,b1,b2))
 	
 
 func _process(delta: float) -> void:
 	if trail_markers.size() == 0:
-		spawn_marker()
+		if spawn_parent:
+			spawn_marker()
 	elif (global_position - trail_markers[-1].global_position).length() > min_distance:
-		spawn_marker()
+		if spawn_parent:
+			spawn_marker()
 		
 func spawn_marker() -> void:
 	var marker := preload("res://player/trail_marker.tscn").instantiate()
@@ -73,7 +75,7 @@ func check_latest_for_collision() -> int:
 	return NAN
 
 func spawn_collision(start_idx : int) -> void:
-	print_debug("Hello world! ", start_idx)
+	#print_debug("Hello world! ", start_idx)
 	#var a1 = trail_markers[start_idx].global_position
 	#var a2 = trail_markers[start_idx+1].global_position
 	#var b1 = trail_markers[-1].global_position

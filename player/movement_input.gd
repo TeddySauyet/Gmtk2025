@@ -87,10 +87,10 @@ func _physics_process(delta: float) -> void:
 	apply_movement(delta)
 	#print(state_lift_alpha)
 	var rect := get_viewport().get_visible_rect()
-	if char.position.x < 0:
-		char.position.x += rect.size.x
-	if char.position.x > rect.size.x:
-		char.position.x -= rect.size.x
+	#if char.position.x < 0:
+		#char.position.x += rect.size.x
+	#if char.position.x > rect.size.x:
+		#char.position.x -= rect.size.x
 	if char.position.y < 0:
 		char.position.y += rect.size.y
 	if char.position.y > rect.size.y:

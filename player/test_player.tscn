@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cifh4i4igo60u"]
 
-[ext_resource type="PackedScene" uid="uid://du2t6mci3ss5g" path="res://player/player.tscn" id="1_0scu2"]
 [ext_resource type="Script" path="res://player/test_player.gd" id="1_5iccb"]
+[ext_resource type="PackedScene" uid="uid://q2tnuge8ka6i" path="res://tech/Duplicator.tscn" id="2_5axby"]
 
 [node name="TestPlayer" type="Node2D"]
 script = ExtResource("1_5iccb")
 
-[node name="Player" parent="." instance=ExtResource("1_0scu2")]
-position = Vector2(193, 211)
+[node name="Duplicator" parent="." node_paths=PackedStringArray("root") instance=ExtResource("2_5axby")]
+root = NodePath("..")
