@@ -41,7 +41,6 @@ func apply_movement(delta : float) -> void:
 	var drag_force := Vector2.ZERO
 	if vel2 != 0:
 		drag_force = -char.velocity.normalized()*vel2*_drag_coef
-	
 	var throttle_force := forward * state_throttle_alpha * throttle_max
 	
 	
@@ -55,15 +54,20 @@ func apply_movement(delta : float) -> void:
 		var desired_up_portion := total_force.project(Vector2.UP).length()
 		var frac = clampf(max_up_portion, 0.0, desired_up_portion)
 		lift_force = max_vertical_force * frac/max_up_portion
+		if lift_force.dot(total_force) > 0:
+			lift_force *= -1
+		#print(max_vertical_force,'|',frac,'|',desired_up_portion, '|', total_force + lift_force)
 	else:
 		lift_force = vertical * state_lift_alpha * char.velocity.length() * lift_vel_coef
 	
-	print(state_autopilot_on,total_force,lift_force, state_lift_alpha)
 	total_force += lift_force * delta
+	
+	#print(lift_force)
 	
 	char.velocity += total_force * delta
 	char.move_and_slide()
 	char.rotation = char.velocity.angle()
+	#print(char.velocity.length(),'|',lift_force,'|',gravity_force,'|',state_lift_alpha,'|',throttle_force)
 
 func set_movement_values(delta : float) -> void:
 	if Input.is_action_pressed("throttle"):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://du2t6mci3ss5g"]
+[gd_scene load_steps=4 format=3 uid="uid://du2t6mci3ss5g"]
 
 [ext_resource type="PackedScene" uid="uid://ck57spujbxjdi" path="res://player/movement_input.tscn" id="1_qefl4"]
 [ext_resource type="Texture2D" uid="uid://dpyaiwuq5yb8s" path="res://icon.svg" id="2_lx3ga"]
+[ext_resource type="PackedScene" uid="uid://b0560qygmcmo3" path="res://player/trail.tscn" id="3_4380i"]
 
 [node name="Player" type="CharacterBody2D"]
 
@@ -11,3 +12,6 @@ char = NodePath("..")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_lx3ga")
+
+[node name="Trail" parent="." instance=ExtResource("3_4380i")]
+position = Vector2(-13, 0)

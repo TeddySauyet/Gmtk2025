@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87xgppad6esl"]
+
+[ext_resource type="Texture2D" uid="uid://dpyaiwuq5yb8s" path="res://icon.svg" id="1_cfkp4"]
+[ext_resource type="Script" path="res://player/trail_marker.gd" id="1_fnq07"]
+
+[node name="TrailMarker" type="Node2D"]
+script = ExtResource("1_fnq07")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_cfkp4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.8
+one_shot = true
+autostart = true
