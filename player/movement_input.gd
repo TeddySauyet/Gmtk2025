@@ -4,18 +4,21 @@ class_name MovementInput
 @export var char : CharacterBody2D
 
 @export_category("Plane speeds")
+@export var speed_factor := 0.5
 @export var throttle_max : float = 300.0
 @export var gravity_max : float = 750.0
-@export var lift_vel_coef := 200.0
+@export var lift_vel_coef := 400.0 #200.0
 @export var max_throttle_speed : float = 600.0
 @export var thin_air_threshold := 100.0
 @export var thin_air_delta := 1.0
+@export var flaps_max_force := 500
 var state_in_thin_air := false : set = set_thin_air
 @onready var _drag_coef : float = throttle_max/max_throttle_speed**2
 
 @export_category("Inputs")
 @export var throttle_delta_scale : float = 1.0
 var state_throttle_alpha := 1.0
+var state_flaps := false
 
 var state_autopilot_on : bool = true
 @export var lift_delta_scale := 5.0
@@ -49,9 +52,12 @@ func apply_movement(delta : float) -> void:
 		drag_force = -char.velocity.normalized()*vel2*_drag_coef
 	var throttle_force := forward * state_throttle_alpha * throttle_max
 	
+	var flaps_force := Vector2.ZERO
+	if state_flaps:
+		flaps_force = -forward * flaps_max_force
 	
-	
-	var total_force := throttle_force + drag_force + gravity_force
+	var total_force := throttle_force + drag_force + gravity_force + flaps_force
+	total_force *= speed_factor
 	
 	var lift_force := Vector2.ZERO
 	if state_autopilot_on:
@@ -66,7 +72,7 @@ func apply_movement(delta : float) -> void:
 	else:
 		lift_force = vertical * state_lift_alpha * char.velocity.length() * lift_vel_coef
 	
-	total_force += lift_force * delta
+	total_force += lift_force * delta * speed_factor
 	
 	#print(lift_force)
 	
@@ -76,10 +82,13 @@ func apply_movement(delta : float) -> void:
 	#print(char.velocity.length(),'|',lift_force,'|',gravity_force,'|',state_lift_alpha,'|',throttle_force)
 
 func set_movement_values(delta : float) -> void:
-	if Input.is_action_pressed("throttle"):
-		state_throttle_alpha += throttle_delta_scale * delta
+	#if Input.is_action_pressed("throttle"):
+		#state_throttle_alpha += throttle_delta_scale * delta
 	if Input.is_action_pressed("flaps"):
-		state_throttle_alpha -= throttle_delta_scale * delta
+		state_flaps = true
+	else:
+		state_flaps = false
+	state_throttle_alpha = 1.0
 	state_throttle_alpha = clampf(state_throttle_alpha, -1, 1)
 	state_lift_alpha += Input.get_axis("lift_up", "lift_down") * lift_delta_scale * delta
 	state_lift_alpha = clampf(state_lift_alpha, -1.0, 1.0)

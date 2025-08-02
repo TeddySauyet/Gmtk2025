@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="5_nxu2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk1yr"]
-size = Vector2(1232, 115)
+size = Vector2(1543, 135.5)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_1vx6i")
@@ -16,12 +16,12 @@ script = ExtResource("1_1vx6i")
 root = NodePath("..")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
-position = Vector2(912, 837)
+position = Vector2(964, 176)
 script = ExtResource("2_kfaaf")
 enemy_to_spawn = ExtResource("3_wh65u")
 
 [node name="EnemySpawner2" type="Node2D" parent="."]
-position = Vector2(200, 858)
+position = Vector2(571, 489)
 script = ExtResource("2_kfaaf")
 enemy_to_spawn = ExtResource("3_wh65u")
 
@@ -33,5 +33,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(573, 1150.5)
+position = Vector2(744.5, 735.75)
 shape = SubResource("RectangleShape2D_pk1yr")
