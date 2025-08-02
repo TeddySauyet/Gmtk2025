@@ -4,13 +4,13 @@ class_name MovementInput
 @export var char : CharacterBody2D
 
 @export_category("Plane speeds")
-@export var speed_factor := 0.5
+@export var speed_factor := 0.25
 @export var throttle_max : float = 300.0
 @export var gravity_max : float = 750.0
-@export var lift_vel_coef := 400.0 #200.0
+@export var lift_vel_coef := 800.0 #200.0
 @export var max_throttle_speed : float = 600.0
 @export var thin_air_threshold := 100.0
-@export var thin_air_delta := 1.0
+@export var thin_air_delta := 0.01
 @export var flaps_max_force := 500
 var state_in_thin_air := false : set = set_thin_air
 @onready var _drag_coef : float = throttle_max/max_throttle_speed**2
@@ -39,7 +39,11 @@ func clamp_vec_mag(vec : Vector2, mini, maxi) -> Vector2:
 
 func apply_movement(delta : float) -> void:
 	
-	#if char.global_position.y < thin
+	
+	var thin_air := 1.0
+	if char.global_position.y < thin_air_threshold:
+		state_in_thin_air = true
+		thin_air = clampf((thin_air_threshold - char.global_position.y )*thin_air_delta, 0.0, 1.0)
 	
 	var gravity_force := Vector2.DOWN * gravity_max
 	
@@ -50,7 +54,7 @@ func apply_movement(delta : float) -> void:
 	var drag_force := Vector2.ZERO
 	if vel2 != 0:
 		drag_force = -char.velocity.normalized()*vel2*_drag_coef
-	var throttle_force := forward * state_throttle_alpha * throttle_max
+	var throttle_force := forward * state_throttle_alpha * throttle_max * thin_air
 	
 	var flaps_force := Vector2.ZERO
 	if state_flaps:
@@ -72,6 +76,8 @@ func apply_movement(delta : float) -> void:
 	else:
 		lift_force = vertical * state_lift_alpha * char.velocity.length() * lift_vel_coef
 	
+	lift_force *= thin_air
+	
 	total_force += lift_force * delta * speed_factor
 	
 	#print(lift_force)
@@ -91,6 +97,11 @@ func set_movement_values(delta : float) -> void:
 	state_throttle_alpha = 1.0
 	state_throttle_alpha = clampf(state_throttle_alpha, -1, 1)
 	state_lift_alpha += Input.get_axis("lift_up", "lift_down") * lift_delta_scale * delta
+	if Input.get_axis("lift_up", "lift_down") == 0.0:
+		if state_lift_alpha > 0:
+			state_lift_alpha -= lift_delta_scale * delta
+		elif state_lift_alpha < 0:
+			state_lift_alpha += lift_delta_scale * delta
 	state_lift_alpha = clampf(state_lift_alpha, -1.0, 1.0)
 	var new_autopilot = not(Input.is_action_pressed("lift_down") or Input.is_action_pressed("lift_up"))
 	if new_autopilot != state_autopilot_on:

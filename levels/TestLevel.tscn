@@ -20,11 +20,6 @@ position = Vector2(964, 176)
 script = ExtResource("2_kfaaf")
 enemy_to_spawn = ExtResource("3_wh65u")
 
-[node name="EnemySpawner2" type="Node2D" parent="."]
-position = Vector2(571, 489)
-script = ExtResource("2_kfaaf")
-enemy_to_spawn = ExtResource("3_wh65u")
-
 [node name="PlayerSpawner" parent="." instance=ExtResource("5_nxu2p")]
 position = Vector2(155, 193)
 

@@ -3,6 +3,8 @@ class_name LevelHelper
 
 @export var root : Node2D
 
+var victory := false
+
 signal all_enemies_died()
 
 var spawned_nodes : Array[Node]
@@ -45,8 +47,13 @@ func clear_level() -> void:
 func enemy_exited_tree() -> void:
 	n_enemies -= 1
 	if n_enemies <= 0:
-		all_enemies_died.emit()
+		#all_enemies_died.emit()
+		victory = true
+		var ui := preload("res://menus/level_complete.tscn").instantiate()
+		ui.set_global_position(get_viewport_rect().size/2 - ui.get_rect().size/2)
+		root.add_child(ui)
 
 func on_player_died() -> void:
-	clear_level()
-	start_level()
+	if not victory:
+		clear_level()
+		start_level()

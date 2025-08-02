@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyxupg2jx2hsf"]
+
+[ext_resource type="Script" path="res://menus/menu_level_display.gd" id="1_8vp75"]
+[ext_resource type="Theme" uid="uid://bcwoh07hstjqx" path="res://menus/ui_theme.tres" id="2_askl3"]
+
+[node name="MenuLevelDisplay" type="MarginContainer"]
+script = ExtResource("1_8vp75")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_askl3")
+text = "placeholder"
+
+[node name="Info" type="Label" parent="VBoxContainer"]
+layout_mode = 2
