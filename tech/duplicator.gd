@@ -78,9 +78,11 @@ func _process(delta: float) -> void:
 			root.add_child(item.negative)
 			item.main.add_to_group("main")
 			item.main.remove_from_group("duplicates")
-		if item.negative.has_method("duplicate_copy_main"):
-			item.negative.duplicate_copy_main(item.main)
-		if item.positive.has_method("duplicate_copy_main"):
-			item.positive.duplicate_copy_main(item.main)
+		if is_instance_valid(item.negative):
+			if item.negative.has_method("duplicate_copy_main"):
+				item.negative.duplicate_copy_main(item.main)
+		if is_instance_valid(item.positive):
+			if item.positive.has_method("duplicate_copy_main"):
+				item.positive.duplicate_copy_main(item.main)
 	for item in to_delete:
 		items.erase(item)

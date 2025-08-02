@@ -8,6 +8,9 @@ class_name MovementInput
 @export var gravity_max : float = 750.0
 @export var lift_vel_coef := 200.0
 @export var max_throttle_speed : float = 600.0
+@export var thin_air_threshold := 100.0
+@export var thin_air_delta := 1.0
+var state_in_thin_air := false : set = set_thin_air
 @onready var _drag_coef : float = throttle_max/max_throttle_speed**2
 
 @export_category("Inputs")
@@ -32,6 +35,9 @@ func clamp_vec_mag(vec : Vector2, mini, maxi) -> Vector2:
 		return vec
 
 func apply_movement(delta : float) -> void:
+	
+	#if char.global_position.y < thin
+	
 	var gravity_force := Vector2.DOWN * gravity_max
 	
 	var forward := char.global_transform.x
@@ -91,7 +97,16 @@ func _physics_process(delta: float) -> void:
 		#char.position.x += rect.size.x
 	#if char.position.x > rect.size.x:
 		#char.position.x -= rect.size.x
-	if char.position.y < 0:
-		char.position.y += rect.size.y
-	if char.position.y > rect.size.y:
-		char.position.y -= rect.size.y
+	#if char.position.y < 0:
+		#char.position.y += rect.size.y
+	#if char.position.y > rect.size.y:
+		#char.position.y -= rect.size.y
+
+func set_thin_air(value : bool) -> void:
+	var change := value == state_in_thin_air
+	state_in_thin_air = value
+	if change:
+		if state_in_thin_air:
+			SignalBus.entered_thin_air.emit()
+		else:
+			SignalBus.exited_thin_air

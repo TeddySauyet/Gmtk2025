@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://du2t6mci3ss5g"]
+[gd_scene load_steps=6 format=3 uid="uid://du2t6mci3ss5g"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_gfocv"]
 [ext_resource type="PackedScene" uid="uid://ck57spujbxjdi" path="res://player/movement_input.tscn" id="1_qefl4"]
 [ext_resource type="Texture2D" uid="uid://dpyaiwuq5yb8s" path="res://icon.svg" id="2_lx3ga"]
 [ext_resource type="PackedScene" uid="uid://b0560qygmcmo3" path="res://player/trail.tscn" id="3_4380i"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1msq8"]
+size = Vector2(30, 30)
+
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 10
 script = ExtResource("1_gfocv")
 
 [node name="MovementInput" parent="." node_paths=PackedStringArray("char") instance=ExtResource("1_qefl4")]
@@ -17,3 +21,6 @@ texture = ExtResource("2_lx3ga")
 
 [node name="Trail" parent="." instance=ExtResource("3_4380i")]
 position = Vector2(-13, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1msq8")
