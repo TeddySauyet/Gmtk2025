@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bow5v4uryh2jb"]
+
+[ext_resource type="Script" path="res://tech/game_state.gd" id="1_2kigk"]
+
+[node name="GameState" type="HBoxContainer"]
+script = ExtResource("1_2kigk")
