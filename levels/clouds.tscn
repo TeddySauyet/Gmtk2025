@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://77vytd2f82wh"]
+
+[ext_resource type="Texture2D" uid="uid://7a76lc54mi70" path="res://levels/assets/cloud0.png" id="1_4y5de"]
+
+[node name="Clouds" type="Node2D"]
+
+[node name="Cloud0" type="Sprite2D" parent="."]
+position = Vector2(312, 364)
+texture = ExtResource("1_4y5de")

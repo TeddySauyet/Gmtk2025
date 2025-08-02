@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxtdlrhql4db7"]
+
+[ext_resource type="Texture2D" uid="uid://dkc1y8j6uj3l5" path="res://player/sky.png" id="1_8gidy"]
+[ext_resource type="Texture2D" uid="uid://ctw56yeh67k03" path="res://levels/assets/ground1.png" id="2_aryve"]
+
+[node name="background1" type="Node2D"]
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(579, 338)
+texture = ExtResource("1_8gidy")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(570, -278)
+texture = ExtResource("2_aryve")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-500, 750)
+polygon = PackedVector2Array(-7, -7, 51, -101, 181, -31, 478, -20, 874, -91, 1155, -95, 1540, -26, 1870, -94, 2089, -143, 2103, 5, 2010, 80, 55, 77)

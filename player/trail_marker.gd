@@ -8,7 +8,9 @@ var idx : int = 0
 func _ready() -> void:
 	$Timer.timeout.connect(kill)
 	SignalBus.level_clear.connect(kill)
-
+	$GPUParticles2D.emitting = true
+	$AnimationPlayer.play("new_animation")
+	
 func kill() -> void:
 	dead.emit(self)
 	queue_free()

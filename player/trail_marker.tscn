@@ -1,16 +1,111 @@
-[gd_scene load_steps=3 format=3 uid="uid://c87xgppad6esl"]
+[gd_scene load_steps=14 format=3 uid="uid://c87xgppad6esl"]
 
-[ext_resource type="Texture2D" uid="uid://dpyaiwuq5yb8s" path="res://icon.svg" id="1_cfkp4"]
 [ext_resource type="Script" path="res://player/trail_marker.gd" id="1_fnq07"]
+
+[sub_resource type="Gradient" id="Gradient_vg2ox"]
+offsets = PackedFloat32Array(0.00673401, 0.690236, 0.989899)
+colors = PackedColorArray(1, 1, 1, 1, 0.531051, 0.531051, 0.531051, 1, 0.529412, 0.529412, 0.529412, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wdbe0"]
+gradient = SubResource("Gradient_vg2ox")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_8tb42"]
+_data = [Vector2(0, 0.995503), 0.0, 0.0, 0, 0, Vector2(0.99182, 0.0107229), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dcq14"]
+curve = SubResource("Curve_8tb42")
+
+[sub_resource type="Curve" id="Curve_2ylih"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.813906, 0.788654), -0.669228, -0.669228, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_unl2y"]
+curve = SubResource("Curve_2ylih")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44l6i"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 33.9
+gravity = Vector3(0, 0, 0)
+damping_min = 22.766
+damping_max = 40.763
+scale_curve = SubResource("CurveTexture_unl2y")
+alpha_curve = SubResource("CurveTexture_dcq14")
+
+[sub_resource type="Gradient" id="Gradient_4mil3"]
+offsets = PackedFloat32Array(0, 0.723906)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q7pk3"]
+gradient = SubResource("Gradient_4mil3")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_d4sam"]
+resource_name = "new_animation"
+length = 2.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_c0vif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7x7p"]
+_data = {
+"RESET": SubResource("Animation_c0vif"),
+"new_animation": SubResource("Animation_d4sam")
+}
 
 [node name="TrailMarker" type="Node2D"]
 script = ExtResource("1_fnq07")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_cfkp4")
+texture = SubResource("GradientTexture2D_wdbe0")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.8
 one_shot = true
 autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_44l6i")
+texture = SubResource("GradientTexture2D_q7pk3")
+lifetime = 2.8
+one_shot = true
+explosiveness = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i7x7p")
+}

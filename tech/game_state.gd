@@ -21,8 +21,10 @@ var current_level : Level
 
 func _ready() -> void:
 	levels = [
-		Level.Create("res://levels/TestLevel.tscn","Test level"),
-		Level.Create("res://levels/Level1.tscn", "Level 1")
+		#Level.Create("res://levels/levels/TestLevel.tscn","Test level"),
+		Level.Create("res://levels/levels/Level1.tscn", "Can you loop the UFO?"),
+		Level.Create("res://levels/levels/Level2.tscn", "Can you loop two?"),
+		Level.Create("res://levels/levels/Level_1_low.tscn", "Precision flying required"),
 	]
 
 func advance_level() -> void:
