@@ -25,6 +25,8 @@ func _ready() -> void:
 		Level.Create("res://levels/levels/Level1.tscn", "Can you loop the UFO?"),
 		Level.Create("res://levels/levels/Level2.tscn", "Can you loop two?"),
 		Level.Create("res://levels/levels/Level_1_low.tscn", "Precision flying required"),
+		Level.Create("res://levels/levels/Level_path_follow_0.tscn", "They're evolving...."),
+		Level.Create("res://levels/levels/Level_path_follow_1.tscn", "Good luck.")
 	]
 
 func advance_level() -> void:

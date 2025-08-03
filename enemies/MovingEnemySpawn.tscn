@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2dt4h3uvsh4y"]
+
+[ext_resource type="Script" path="res://enemies/moving_enemy_spawn.gd" id="1_qar4t"]
+
+[node name="PathFOllowEnemySpawn" type="Node2D"]
+script = ExtResource("1_qar4t")

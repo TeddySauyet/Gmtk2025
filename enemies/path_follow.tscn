@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://pyywfyh81vmt"]
+
+[ext_resource type="Script" path="res://enemies/path_follow.gd" id="1_36xvb"]
+[ext_resource type="Texture2D" uid="uid://bse1ref0s2fgg" path="res://enemies/assets/ufo0.png" id="2_ah8hu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc288"]
+radius = 22.0227
+
+[node name="Static" type="CharacterBody2D"]
+collision_layer = 12
+collision_mask = 3
+script = ExtResource("1_36xvb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["main"]]
+position = Vector2(-2, -3)
+shape = SubResource("CircleShape2D_cc288")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ah8hu")

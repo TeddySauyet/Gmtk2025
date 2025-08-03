@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bngfxrmeaqkqd"]
+
+[ext_resource type="Script" path="res://levels/levels/test_level.gd" id="1_mobc3"]
+[ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_ekaby"]
+[ext_resource type="PackedScene" uid="uid://d2dt4h3uvsh4y" path="res://enemies/MovingEnemySpawn.tscn" id="5_aggoy"]
+[ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="5_jm67q"]
+[ext_resource type="PackedScene" uid="uid://pyywfyh81vmt" path="res://enemies/path_follow.tscn" id="6_f6fgm"]
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="6_yrbjb"]
+
+[sub_resource type="Curve2D" id="Curve2D_i2iuw"]
+_data = {
+"points": PackedVector2Array(-33.8134, 6.51695, 33.8134, -6.51695, 117.962, 86.1735, -7.69547, 12.4032, 7.69547, -12.4032, 307.962, 24.1735, 29.8491, 20.1815, -29.8491, -20.1815, 222.962, -284.827, 31.4815, -25.8576, -31.4815, 25.8576, -245.038, -209.827, -6.73477, -65.1028, 6.73477, 65.1028, -346.038, -52.8265, -24.458, -8.81945, 24.458, 8.81945, -236.038, 104.173, 0, 0, 0, 0, 33.9623, 89.1735, 0, 0, 0, 0, 117.962, 86.1735)
+}
+point_count = 8
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_mobc3")
+
+[node name="LevelHelper" parent="." node_paths=PackedStringArray("root") instance=ExtResource("2_ekaby")]
+root = NodePath("..")
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("5_jm67q")]
+position = Vector2(93, 155)
+
+[node name="background1" parent="." instance=ExtResource("6_yrbjb")]
+
+[node name="EnemySpawn" parent="." instance=ExtResource("5_aggoy")]
+position = Vector2(478, 248)
+loop = true
+speed = 100.0
+enemy_to_spawn = ExtResource("6_f6fgm")
+
+[node name="Path2D" type="Path2D" parent="EnemySpawn"]
+position = Vector2(292.038, 156.827)
+curve = SubResource("Curve2D_i2iuw")

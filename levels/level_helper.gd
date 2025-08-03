@@ -19,8 +19,6 @@ func start_level() -> void:
 	for child in root.get_children():
 		if child is EnemySpawner:
 			var enemy = child.enemy_to_spawn.instantiate()
-			if enemy.has_method("set_spawner"):
-				enemy.set_spawner(child)
 			enemy.global_position = child.global_position
 			enemy.add_to_group("main")
 			enemy.add_to_group("loopable")
@@ -28,6 +26,8 @@ func start_level() -> void:
 			n_enemies += 1
 			enemy.tree_exited.connect(enemy_exited_tree)
 			root.add_child(enemy)
+			if enemy.has_method("set_spawner"):
+				enemy.set_spawner(child)
 			spawned_nodes.push_back(enemy)
 		if child is PlayerSpawner:
 			var player = preload("res://player/player.tscn").instantiate()

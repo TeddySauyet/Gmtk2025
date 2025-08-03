@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://c46lb6yyguw1a"]
+
+[ext_resource type="Script" path="res://levels/levels/test_level.gd" id="1_223r0"]
+[ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_lipvc"]
+[ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="3_s2l0t"]
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="4_wr7iw"]
+[ext_resource type="PackedScene" uid="uid://d2dt4h3uvsh4y" path="res://enemies/MovingEnemySpawn.tscn" id="5_wlnw2"]
+[ext_resource type="PackedScene" uid="uid://pyywfyh81vmt" path="res://enemies/path_follow.tscn" id="6_vt8dp"]
+
+[sub_resource type="Curve2D" id="Curve2D_ysldk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 12, 79, 0, 0, 0, 0, 454, 87)
+}
+point_count = 2
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_223r0")
+
+[node name="LevelHelper" parent="." node_paths=PackedStringArray("root") instance=ExtResource("2_lipvc")]
+root = NodePath("..")
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("3_s2l0t")]
+position = Vector2(93, 155)
+
+[node name="background1" parent="." instance=ExtResource("4_wr7iw")]
+
+[node name="EnemySpawn" parent="." instance=ExtResource("5_wlnw2")]
+position = Vector2(478, 248)
+speed = 200.0
+enemy_to_spawn = ExtResource("6_vt8dp")
+
+[node name="Path2D" type="Path2D" parent="EnemySpawn"]
+curve = SubResource("Curve2D_ysldk")
