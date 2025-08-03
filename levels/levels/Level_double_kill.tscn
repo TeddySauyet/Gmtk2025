@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3136t4e8p5or"]
+
+[ext_resource type="Script" path="res://levels/levels/test_level.gd" id="1_2hfu7"]
+[ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_eawah"]
+[ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="3_mum8k"]
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="4_bfrgp"]
+[ext_resource type="PackedScene" uid="uid://c0hj17vn7hqkd" path="res://enemies/EnemySpawn.tscn" id="5_u5swq"]
+[ext_resource type="PackedScene" uid="uid://ro57kev3wix6" path="res://enemies/static.tscn" id="6_n1ew6"]
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_2hfu7")
+
+[node name="LevelHelper" parent="." node_paths=PackedStringArray("root") instance=ExtResource("2_eawah")]
+root = NodePath("..")
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("3_mum8k")]
+position = Vector2(93, 155)
+
+[node name="background1" parent="." instance=ExtResource("4_bfrgp")]
+
+[node name="EnemySpawn" parent="." instance=ExtResource("5_u5swq")]
+position = Vector2(661, 357)
+enemy_to_spawn = ExtResource("6_n1ew6")
+
+[node name="EnemySpawn2" parent="." instance=ExtResource("5_u5swq")]
+position = Vector2(667, 281)
+enemy_to_spawn = ExtResource("6_n1ew6")

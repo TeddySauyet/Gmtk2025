@@ -21,19 +21,19 @@ func start_wind() -> void:
 	Sounds.wind.play()
 
 func kill() -> void:
-	if is_instance_valid($Sprite2D) and is_instance_valid($MovementInput) and is_instance_valid($CollisionShape2D):
-		$Sprite2D.visible = false
-		$MovementInput.queue_free()
-		$CollisionShape2D.queue_free()
-		var explosion := preload("res://player/explosion.tscn").instantiate()
-		explosion.finished.connect(kill_for_real)
-		add_child(explosion)
-		Sounds.helicopter.stop()
-		Sounds.wind.stop()
-	else:
-		Sounds.helicopter.stop()
-		Sounds.wind.stop()
-		kill_for_real()
+	#if is_instance_valid($Sprite2D) and is_instance_valid($MovementInput) and is_instance_valid($CollisionShape2D):
+		#$Sprite2D.visible = false
+		#$MovementInput.queue_free()
+		#$CollisionShape2D.queue_free()
+		#var explosion := preload("res://player/explosion.tscn").instantiate()
+		#explosion.finished.connect(kill_for_real)
+		#add_child(explosion)
+		#Sounds.helicopter.stop()
+		#Sounds.wind.stop()
+	#else:
+	Sounds.helicopter.stop()
+	Sounds.wind.stop()
+	kill_for_real()
 	
 func kill_for_real() -> void:
 	SignalBus.player_died.emit()

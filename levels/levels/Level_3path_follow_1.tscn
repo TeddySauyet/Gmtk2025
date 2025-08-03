@@ -1,17 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnp1b0puitfgm"]
+[gd_scene load_steps=7 format=3 uid="uid://bnp1b0puitfgm"]
 
 [ext_resource type="Script" path="res://levels/levels/test_level.gd" id="1_6kcxt"]
 [ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_hdi0g"]
 [ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="3_emtey"]
 [ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="4_0v66x"]
-[ext_resource type="PackedScene" uid="uid://d2dt4h3uvsh4y" path="res://enemies/MovingEnemySpawn.tscn" id="5_rv1vq"]
-[ext_resource type="PackedScene" uid="uid://pyywfyh81vmt" path="res://enemies/path_follow.tscn" id="6_78yfp"]
-
-[sub_resource type="Curve2D" id="Curve2D_ysldk"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1393, 213, 0, 0, 0, 0, 1649, 233, 0, 0, 0, 0, 1631, 561, 0, 0, 0, 0, 1287, 615, 0, 0, 0, 0, 1299, 227, 0, 0, 0, 0, 1393, 213)
-}
-point_count = 6
+[ext_resource type="PackedScene" uid="uid://c0hj17vn7hqkd" path="res://enemies/EnemySpawn.tscn" id="5_jgx3t"]
+[ext_resource type="PackedScene" uid="uid://ro57kev3wix6" path="res://enemies/static.tscn" id="6_xdwls"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_6kcxt")
@@ -24,29 +18,14 @@ position = Vector2(93, 155)
 
 [node name="background1" parent="." instance=ExtResource("4_0v66x")]
 
-[node name="EnemySpawn" parent="." instance=ExtResource("5_rv1vq")]
-position = Vector2(-574, -224)
-loop = true
-speed = 200.0
-enemy_to_spawn = ExtResource("6_78yfp")
+[node name="EnemySpawn" parent="." instance=ExtResource("5_jgx3t")]
+position = Vector2(119, 537)
+enemy_to_spawn = ExtResource("6_xdwls")
 
-[node name="Path2D" type="Path2D" parent="EnemySpawn"]
-curve = SubResource("Curve2D_ysldk")
+[node name="EnemySpawn2" parent="." instance=ExtResource("5_jgx3t")]
+position = Vector2(707, 567)
+enemy_to_spawn = ExtResource("6_xdwls")
 
-[node name="EnemySpawn3" parent="." instance=ExtResource("5_rv1vq")]
-position = Vector2(-784, -132)
-loop = true
-speed = 200.0
-enemy_to_spawn = ExtResource("6_78yfp")
-
-[node name="Path2D" type="Path2D" parent="EnemySpawn3"]
-curve = SubResource("Curve2D_ysldk")
-
-[node name="EnemySpawn2" parent="." instance=ExtResource("5_rv1vq")]
-position = Vector2(-672, 6)
-loop = true
-speed = 200.0
-enemy_to_spawn = ExtResource("6_78yfp")
-
-[node name="Path2D" type="Path2D" parent="EnemySpawn2"]
-curve = SubResource("Curve2D_ysldk")
+[node name="EnemySpawn3" parent="." instance=ExtResource("5_jgx3t")]
+position = Vector2(1293, 545)
+enemy_to_spawn = ExtResource("6_xdwls")

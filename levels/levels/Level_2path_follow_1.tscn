@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba272vsfbi0x0"]
+[gd_scene load_steps=9 format=3 uid="uid://ba272vsfbi0x0"]
 
 [ext_resource type="Script" path="res://levels/levels/test_level.gd" id="1_4ov0l"]
 [ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_nqb4r"]
@@ -7,11 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://d2dt4h3uvsh4y" path="res://enemies/MovingEnemySpawn.tscn" id="5_t2waj"]
 [ext_resource type="PackedScene" uid="uid://pyywfyh81vmt" path="res://enemies/path_follow.tscn" id="6_an86l"]
 
-[sub_resource type="Curve2D" id="Curve2D_ysldk"]
+[sub_resource type="Curve2D" id="Curve2D_8apmh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1537, -24, 0, 0, 0, 0, 1753, -98, 0, 0, 0, 0, 1761, 228, 0, 0, 0, 0, 1409, 232, 0, 0, 0, 0, 1347, -100, 0, 0, 0, 0, 1417, -96, 0, 0, 0, 0, 1537, -24)
+"points": PackedVector2Array(0, 0, 0, 0, 46, -62, 0, 0, 0, 0, 163, 9, 0, 0, 0, 0, 103, 129, 0, 0, 0, 0, -10, 62, 0, 0, 0, 0, 46, -62)
 }
-point_count = 7
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_3jcqp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 69, -104, 0, 0, 0, 0, 157, 13, 0, 0, 0, 0, 94, 109, 0, 0, 0, 0, -5, 5, 0, 0, 0, 0, 69, -104)
+}
+point_count = 5
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_4ov0l")
@@ -24,20 +30,16 @@ position = Vector2(93, 155)
 
 [node name="background1" parent="." instance=ExtResource("4_dx1oj")]
 
-[node name="EnemySpawn" parent="." instance=ExtResource("5_t2waj")]
-position = Vector2(-402, 212)
-loop = true
-speed = 200.0
+[node name="PathFOllowEnemySpawn" parent="." instance=ExtResource("5_t2waj")]
+position = Vector2(901, 242)
 enemy_to_spawn = ExtResource("6_an86l")
 
-[node name="Path2D" type="Path2D" parent="EnemySpawn"]
-curve = SubResource("Curve2D_ysldk")
+[node name="Path2D" type="Path2D" parent="PathFOllowEnemySpawn"]
+curve = SubResource("Curve2D_8apmh")
 
-[node name="EnemySpawn2" parent="." instance=ExtResource("5_t2waj")]
-position = Vector2(-1086, 196)
-loop = true
-speed = 200.0
+[node name="PathFOllowEnemySpawn2" parent="." instance=ExtResource("5_t2waj")]
+position = Vector2(323, 399)
 enemy_to_spawn = ExtResource("6_an86l")
 
-[node name="Path2D" type="Path2D" parent="EnemySpawn2"]
-curve = SubResource("Curve2D_ysldk")
+[node name="Path2D" type="Path2D" parent="PathFOllowEnemySpawn2"]
+curve = SubResource("Curve2D_3jcqp")

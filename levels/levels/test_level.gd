@@ -11,6 +11,5 @@ func _ready() -> void:
 func victory() -> void:
 	print_debug("You win!")
 
-
 func defeat() -> void:
 	print_debug("You lose :()")
