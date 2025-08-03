@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0560qygmcmo3" path="res://player/trail.tscn" id="3_4380i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1msq8"]
-size = Vector2(36, 16)
+size = Vector2(34, 16)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 10
@@ -23,5 +23,5 @@ texture = ExtResource("3_4prkh")
 position = Vector2(-13, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -4)
+position = Vector2(1, -4)
 shape = SubResource("RectangleShape2D_1msq8")
