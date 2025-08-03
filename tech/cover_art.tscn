@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dktlx1uupay2a"]
+
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="1_kv2ao"]
+[ext_resource type="Texture2D" uid="uid://cmkqp5vekxxo3" path="res://player/planel.png" id="2_3iu0w"]
+[ext_resource type="Texture2D" uid="uid://bse1ref0s2fgg" path="res://enemies/assets/ufo0.png" id="3_pqdr0"]
+[ext_resource type="Texture2D" uid="uid://bsthcht3rv578" path="res://levels/assets/loopy.png" id="4_ve56s"]
+
+[node name="CoverArt" type="Node2D"]
+
+[node name="background1" parent="." instance=ExtResource("1_kv2ao")]
+
+[node name="Label" type="Label" parent="background1"]
+offset_left = 210.0
+offset_top = 171.0
+offset_right = 750.0
+offset_bottom = 399.0
+rotation = -0.361283
+theme_override_font_sizes/font_size = 80
+text = "Top LooP: 
+Alien Invasion"
+horizontal_alignment = 1
+
+[node name="Planel" type="Sprite2D" parent="."]
+position = Vector2(424, 556)
+rotation = -0.663225
+scale = Vector2(5.32813, 4)
+texture = ExtResource("2_3iu0w")
+
+[node name="Ufo0" type="Sprite2D" parent="."]
+position = Vector2(942, 195)
+rotation = 0.331613
+scale = Vector2(2.27, 2.27)
+texture = ExtResource("3_pqdr0")
+
+[node name="Ufo1" type="Sprite2D" parent="."]
+position = Vector2(1158, 345)
+rotation = -0.415388
+scale = Vector2(2.27, 2.27)
+texture = ExtResource("3_pqdr0")
+
+[node name="Loopy" type="Sprite2D" parent="."]
+position = Vector2(945.61, 265)
+texture = ExtResource("4_ve56s")

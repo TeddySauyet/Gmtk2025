@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c51a8w3e71al7"]
 
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_1xkpa"]
-[ext_resource type="Theme" path="res://menus/ui_theme.tres" id="1_q8yy8"]
-[ext_resource type="PackedScene" uid="uid://f56nerxxhji4" path="res://levels/background_1.tscn" id="3_kp651"]
+[ext_resource type="Theme" uid="uid://bcwoh07hstjqx" path="res://menus/ui_theme.tres" id="1_q8yy8"]
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="3_kp651"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

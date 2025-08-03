@@ -10,6 +10,17 @@ var dir := 1.0
 var rtrans : RemoteTransform2D
 
 func got_looped() -> void:
+	if is_instance_valid($DeathThrower) and is_instance_valid($CollisionShape2D) and is_instance_valid($Timer):
+		$DeathThrower.activate()
+		$CollisionShape2D.queue_free()
+		$Timer.timeout.connect(dead)
+		$Timer.start()
+	else:
+		dead()
+	
+	
+	
+func dead() -> void:
 	died.emit(self)
 	queue_free()
 

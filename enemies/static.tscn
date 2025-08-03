@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/static.gd" id="1_ienp8"]
 [ext_resource type="Texture2D" uid="uid://bse1ref0s2fgg" path="res://enemies/assets/ufo0.png" id="2_o6jm8"]
-[ext_resource type="PackedScene" uid="uid://nopjrsx26dne" path="res://enemies/death_thrower.tscn" id="3_eycf8"]
+[ext_resource type="PackedScene" uid="uid://bl0xcj786a8nk" path="res://enemies/death_thrower.tscn" id="3_eycf8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cc288"]
 radius = 22.0227

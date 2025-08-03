@@ -1,5 +1,5 @@
 extends Node
-
+class_name death_thrower
 
 @export var target : Node2D
 

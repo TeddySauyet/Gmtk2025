@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw7nukj0kcgse"]
+[gd_scene load_steps=5 format=3 uid="uid://bth43bqkv4ewi"]
 
 [ext_resource type="Script" path="res://menus/learning.gd" id="1_83by5"]
-[ext_resource type="PackedScene" uid="uid://f56nerxxhji4" path="res://levels/background_1.tscn" id="1_tlasp"]
+[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="1_tlasp"]
 [ext_resource type="PackedScene" uid="uid://7naagek157dw" path="res://levels/LevelHelper.tscn" id="2_b2tkt"]
 [ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="3_7kvui"]
 
@@ -23,7 +23,11 @@ offset_top = 283.0
 offset_right = 197.0
 offset_bottom = 311.0
 text = "W/S: tilt up/down
-A: brake"
+A: brake
+
+When your trail is red
+you are upside down,
+so be careful!"
 
 [node name="Label3" type="Label" parent="."]
 offset_left = 614.0
