@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ro57kev3wix6"]
+[gd_scene load_steps=5 format=3 uid="uid://ro57kev3wix6"]
 
 [ext_resource type="Script" path="res://enemies/static.gd" id="1_ienp8"]
 [ext_resource type="Texture2D" uid="uid://bse1ref0s2fgg" path="res://enemies/assets/ufo0.png" id="2_o6jm8"]
+[ext_resource type="PackedScene" uid="uid://nopjrsx26dne" path="res://enemies/death_thrower.tscn" id="3_eycf8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cc288"]
 radius = 22.0227
@@ -18,3 +19,10 @@ shape = SubResource("CircleShape2D_cc288")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_o6jm8")
+
+[node name="DeathThrower" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_eycf8")]
+target = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.8
+one_shot = true

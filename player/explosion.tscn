@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=3 uid="uid://cdybjnip8oxes"]
+
+[ext_resource type="Texture2D" uid="uid://bedhlv6pct5ax" path="res://player/scrap.png" id="1_523wd"]
+[ext_resource type="Script" path="res://player/explosion.gd" id="1_hpt2f"]
+[ext_resource type="Texture2D" uid="uid://bjti8hfy3fy17" path="res://player/smokeys.png" id="2_krq4n"]
+
+[sub_resource type="Curve" id="Curve_5n853"]
+_data = [Vector2(0.0123457, 1), 0.0, 0.0, 0, 0, Vector2(0.806584, 0.725275), -0.971029, -0.971029, 0, 0, Vector2(0.880658, 0.10989), -1.72786, -1.72786, 0, 0, Vector2(1, 0.010989), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_uyxfi"]
+curve = SubResource("Curve_5n853")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1lrhd"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 90.0
+flatness = 0.876
+initial_velocity_min = 186.02
+initial_velocity_max = 311.11
+angular_velocity_min = -405.63
+angular_velocity_max = 324.51
+orbit_velocity_min = -0.0999999
+orbit_velocity_max = 0.1
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 98, 0)
+scale_over_velocity_min = 150.54
+scale_over_velocity_max = 150.54
+alpha_curve = SubResource("CurveTexture_uyxfi")
+hue_variation_min = -0.07
+hue_variation_max = 0.14
+turbulence_enabled = true
+turbulence_noise_scale = 4.816
+turbulence_influence_min = 0.0
+
+[sub_resource type="Curve" id="Curve_wrote"]
+_data = [Vector2(0, 0.747253), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.502058, 0.791209), -1.09552, -1.09552, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rjrg1"]
+curve = SubResource("Curve_wrote")
+
+[sub_resource type="Curve" id="Curve_qbksy"]
+max_value = 4.0
+_data = [Vector2(0, 0.527472), 0.0, 0.0, 0, 0, Vector2(1, 1.49451), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_thtl3"]
+curve = SubResource("Curve_qbksy")
+
+[sub_resource type="Curve" id="Curve_vtn8m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0638298), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_efajj"]
+curve = SubResource("Curve_vtn8m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c6r3g"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 182.79
+initial_velocity_max = 329.74
+gravity = Vector3(0, -80, 0)
+scale_curve = SubResource("CurveTexture_thtl3")
+alpha_curve = SubResource("CurveTexture_rjrg1")
+turbulence_enabled = true
+turbulence_influence_over_life = SubResource("CurveTexture_efajj")
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_hpt2f")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1lrhd")
+texture = ExtResource("1_523wd")
+lifetime = 1.8
+one_shot = true
+explosiveness = 0.81
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_c6r3g")
+texture = ExtResource("2_krq4n")
+one_shot = true
+explosiveness = 0.58
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.8
+one_shot = true
+autostart = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c51a8w3e71al7"]
+[gd_scene load_steps=4 format=3 uid="uid://c51a8w3e71al7"]
 
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_1xkpa"]
 [ext_resource type="Theme" path="res://menus/ui_theme.tres" id="1_q8yy8"]
+[ext_resource type="PackedScene" uid="uid://f56nerxxhji4" path="res://levels/background_1.tscn" id="3_kp651"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,18 +14,40 @@ grow_vertical = 2
 theme = ExtResource("1_q8yy8")
 script = ExtResource("1_1xkpa")
 
+[node name="background1" parent="." instance=ExtResource("3_kp651")]
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 266.0
-offset_top = 53.0
-offset_right = 1204.0
-offset_bottom = 163.0
+offset_left = 556.0
+offset_top = 221.0
+offset_right = 1494.0
+offset_bottom = 444.0
+rotation = -0.361283
 theme_override_font_sizes/font_size = 80
-text = "Top LooP: Alien Invasion"
+text = "Top LooP: 
+Alien Invasion"
+horizontal_alignment = 1
 
 [node name="LevelOptions" type="GridContainer" parent="."]
 layout_mode = 0
-offset_left = 771.0
-offset_top = 216.0
-offset_right = 1206.0
-offset_bottom = 625.0
+offset_left = 758.0
+offset_top = 371.0
+offset_right = 1404.0
+offset_bottom = 691.0
+columns = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 330.0
+offset_right = 285.0
+offset_bottom = 366.0
+text = "Learn the controls!"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 311.0
+offset_right = 1120.0
+offset_bottom = 339.0
+text = "Level select:"

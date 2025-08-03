@@ -10,3 +10,8 @@ func _ready() -> void:
 		var scene := preload("res://menus/menu_level_display.tscn").instantiate()
 		scene.level = level
 		level_options.add_child(scene)
+	$Button.pressed.connect(learning)
+
+
+func learning() -> void:
+	get_tree().change_scene_to_file("res://menus/learning.tscn")

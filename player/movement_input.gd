@@ -6,7 +6,7 @@ class_name MovementInput
 @export_category("Plane speeds")
 @export var speed_factor := 0.25
 @export var throttle_max : float = 300.0
-@export var gravity_max : float = 750.0
+@export var gravity_max : float = 850.0
 @export var lift_vel_coef := 800.0 #200.0
 @export var max_throttle_speed : float = 600.0
 @export var thin_air_threshold := 100.0

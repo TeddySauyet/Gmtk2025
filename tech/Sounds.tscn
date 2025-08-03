@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://q7hydc6hsng"]
+
+[ext_resource type="Script" path="res://tech/sounds.gd" id="1_rj8f5"]
+[ext_resource type="AudioStream" uid="uid://dnu1u78h8h3nk" path="res://player/helicopter.mp3" id="2_lyggq"]
+[ext_resource type="AudioStream" uid="uid://bjgiljorr0fxd" path="res://player/Wind.ogg" id="3_a62af"]
+[ext_resource type="AudioStream" uid="uid://d1l1h7n2jupmg" path="res://player/DeathFlash.ogg" id="4_orwft"]
+[ext_resource type="AudioStream" uid="uid://44yyksid835" path="res://enemies/454595__breviceps__cartoon-flying-ufo.wav" id="5_s07ts"]
+
+[node name="Sounds" type="Node"]
+script = ExtResource("1_rj8f5")
+
+[node name="helicopter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lyggq")
+volume_db = -10.306
+parameters/looping = false
+
+[node name="wind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a62af")
+volume_db = 10.306
+parameters/looping = false
+
+[node name="explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_orwft")
+volume_db = -0.292
+parameters/looping = false
+
+[node name="ufo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s07ts")
+volume_db = -19.552
