@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://enemies/enemy_spawner.gd" id="3_3wr2l"]
 [ext_resource type="PackedScene" uid="uid://ro57kev3wix6" path="res://enemies/static.tscn" id="4_h4eqx"]
 [ext_resource type="PackedScene" uid="uid://ckgb6hro8jt1w" path="res://levels/player_spawner.tscn" id="5_8cedy"]
-[ext_resource type="PackedScene" uid="uid://dxtdlrhql4db7" path="res://levels/background_1.tscn" id="6_rbeu6"]
+[ext_resource type="PackedScene" uid="uid://f56nerxxhji4" path="res://levels/background_1.tscn" id="6_rbeu6"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_1xmap")

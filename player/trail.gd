@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 func spawn_marker() -> void:
 	var marker := preload("res://player/trail_marker.tscn").instantiate()
 	marker.global_position = global_position
+	marker.alpha = (1.0 + cos(global_rotation + PI))/2.0
 	trail_markers.push_back(marker)
 	spawn_parent.add_child(marker)
 	marker.dead.connect(marker_dead)

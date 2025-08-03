@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c87xgppad6esl"]
+[gd_scene load_steps=16 format=3 uid="uid://c87xgppad6esl"]
 
 [ext_resource type="Script" path="res://player/trail_marker.gd" id="1_fnq07"]
+[ext_resource type="Shader" path="res://player/trail_marker.gdshader" id="2_uwexe"]
 
 [sub_resource type="Gradient" id="Gradient_vg2ox"]
 offsets = PackedFloat32Array(0.00673401, 0.690236, 0.989899)
@@ -10,6 +11,12 @@ colors = PackedColorArray(1, 1, 1, 1, 0.531051, 0.531051, 0.531051, 1, 0.529412,
 gradient = SubResource("Gradient_vg2ox")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_irs5q"]
+resource_local_to_scene = true
+shader = ExtResource("2_uwexe")
+shader_parameter/alpha = 1.0
+shader_parameter/color = Color(0.843137, 0.113725, 0.0392157, 1)
 
 [sub_resource type="Curve" id="Curve_8tb42"]
 _data = [Vector2(0, 0.995503), 0.0, 0.0, 0, 0, Vector2(0.99182, 0.0107229), 0.0, 0.0, 0, 0]
@@ -47,6 +54,21 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
+[sub_resource type="Animation" id="Animation_c0vif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_d4sam"]
 resource_name = "new_animation"
 length = 2.8
@@ -61,21 +83,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
-}
-
-[sub_resource type="Animation" id="Animation_c0vif"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i7x7p"]
@@ -93,15 +100,16 @@ scale = Vector2(0.05, 0.05)
 texture = SubResource("GradientTexture2D_wdbe0")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.8
+wait_time = 2.3
 one_shot = true
 autostart = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_irs5q")
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_44l6i")
 texture = SubResource("GradientTexture2D_q7pk3")
-lifetime = 2.8
+lifetime = 2.3
 one_shot = true
 explosiveness = 1.0
 

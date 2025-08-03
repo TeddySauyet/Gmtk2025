@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if not is_in_group("main"):
 		return
 	var collision := get_last_slide_collision()
-	if collision:
+	if collision and collision.get_collider().is_in_group("main"):
 		#print_debug(collision.get_collider())
 		#died.emit()
 		SignalBus.player_died.emit()
